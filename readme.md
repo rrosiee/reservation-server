@@ -8,7 +8,7 @@
 3. docker-compose 실행
 
         $ docker-compose up
-4. api swagger문서 접속 : [127.0.0.1:8000/docs](127.0.0.1:8000/docs)
+4. api swagger문서 접속 : [http://localhost:8000/docs](http://localhost:8000/docs)
 5. (선택) 종료
 
         $ docker-compose down
@@ -29,7 +29,7 @@
 6. 서버 실행
 
         $ python3 manage.py runserver
-7. api swagger문서 접속 : [127.0.0.1:8000/docs](127.0.0.1:8000/docs)
+7. api swagger문서 접속 : [http://localhost:8000/docs](http://localhost:8000/docs)
 
 ## Commit 규칙
 - **형식**: `<타입>: <내용>`
