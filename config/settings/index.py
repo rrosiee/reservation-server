@@ -3,10 +3,11 @@ import environ
 
 # Paths
 env = environ.Env()
-BASE_DIR = Path(__file__).resolve().parent.parent
-SECRET_KEY = env("DJANGO_SECRET_KEY", default="")
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+SECRET_KEY = "django-insecure-sgm(4v^!u3!okntl7*k!$b_-5eqt$4#02av--a%$dm((mo_#n^"
 DEBUG = True
 STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR / "static"
 
 # Security
 ALLOWED_HOSTS = []
@@ -37,13 +38,18 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 # Database
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "reservation",
+        "USER": "postgres",
+        "PASSWORD": "",
+        "HOST": env("DATABASE_HOST", default="localhost"),
+        "PORT": 5432,
     }
 }
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
