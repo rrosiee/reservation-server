@@ -1,9 +1,10 @@
 from datetime import datetime, timedelta
 
 from django.db.models import Q
+from django.utils.timezone import now
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
-from rest_framework import viewsets
+from rest_framework import viewsets, status
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 
@@ -56,12 +57,14 @@ class SchedulesViewSet(viewsets.ViewSet):
         # 1. 날짜 검증
         date_str = request.GET.get("date")
         if not date_str:
-            return Response({"error": "날짜를 입력하세요. (YYYY-MM-DD)"}, status=400)
-
+            return Response({"error": "날짜를 입력하세요. (YYYY-MM-DD)"}, status=status.HTTP_400_BAD_REQUEST)
         try:
             target_date = datetime.strptime(date_str, "%Y-%m-%d").date()
         except ValueError:
-            return Response({"error": "잘못된 날짜 형식입니다. (YYYY-MM-DD)"}, status=400)
+            return Response({"error": "잘못된 날짜 형식입니다. (YYYY-MM-DD)"}, status=status.HTTP_400_BAD_REQUEST)
+        min_reservation_date = now().date() + timedelta(days=3)
+        if target_date < min_reservation_date:
+            return Response({"error": "시험 시작 3일 전까지 예약 가능합니다."}, status=status.HTTP_400_BAD_REQUEST)
 
         # 2. 해당 날짜의 모든 예약 데이터 조회
         reservations = list(
