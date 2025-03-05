@@ -1,3 +1,4 @@
+from datetime import timedelta
 from pathlib import Path
 
 import environ
@@ -56,10 +57,10 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # DRF
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
-        "rest_framework.permissions.AllowAny",
+        "rest_framework.permissions.IsAuthenticated",
     ],
     "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework.authentication.TokenAuthentication",
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
 }
 SWAGGER_SETTINGS = {
@@ -119,6 +120,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 AUTH_USER_MODEL = "user.User"
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=7),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=30),
+    "AUTH_HEADER_TYPES": ("Bearer",),
+}
 
 # Logging
 LOGGING = {
