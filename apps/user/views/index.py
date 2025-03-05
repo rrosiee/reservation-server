@@ -23,7 +23,7 @@ class UserViewSet(viewsets.GenericViewSet):
         responses={200: UserSerializer()},
     )
     @action(detail=False, methods=["get"])
-    def me(self, request):
+    def me(self, request, *args, **kwargs):
         user = request.user
         return Response(
             data=UserSerializer(instance=user).data, status=status.HTTP_200_OK

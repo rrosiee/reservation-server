@@ -4,6 +4,11 @@ from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework import permissions, routers
 
+from apps.reservation.views import (
+    ReservationViewSet,
+    ReservationsViewSet,
+    AdminReservationsViewSet,
+)
 from apps.user.views import AuthViewSet, UserViewSet
 
 # Swagger 문서 관련 API
@@ -46,6 +51,13 @@ router.register(r"auth", AuthViewSet, basename="auth")
 
 # User
 router.register(r"user", UserViewSet, basename="user")
+
+# Reservation
+router.register(r"reservation", ReservationViewSet, basename="reservation")
+router.register(r"reservations", ReservationsViewSet, basename="reservations")
+router.register(
+    r"admin/reservations", AdminReservationsViewSet, basename="admin_reservations"
+)
 
 api_urlpatterns = [
     path("api/", include(router.urls)),

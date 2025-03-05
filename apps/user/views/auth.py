@@ -29,7 +29,7 @@ class AuthViewSet(viewsets.GenericViewSet):
         responses={201: UserSerializer()},
     )
     @action(detail=False, methods=["POST"], url_name="signup")
-    def signup(self, request):
+    def signup(self, request, *args, **kwargs):
         serializer = AuthSignupSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         instance = serializer.save()
@@ -45,10 +45,8 @@ class AuthViewSet(viewsets.GenericViewSet):
         responses={200: UserTokenSerializer()},
     )
     @action(detail=False, methods=["POST"], url_name="login")
-    def login(self, request):
+    def login(self, request, *args, **kwargs):
         serializer = AuthLoginSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-
         user = serializer.validated_data["user"]
-
         return Response(data=UserTokenSerializer(user).data, status=status.HTTP_200_OK)

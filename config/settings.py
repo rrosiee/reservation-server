@@ -26,7 +26,7 @@ DEFAULT_APPS = [
     "rest_framework.authtoken",
     "drf_yasg",
 ]
-LOCAL_APPS = ["apps.user.apps.UserConfig"]
+LOCAL_APPS = ["apps.user.apps.UserConfig", "apps.reservation.apps.ReservationConfig"]
 INSTALLED_APPS = DEFAULT_APPS + LOCAL_APPS
 
 # Middleware
