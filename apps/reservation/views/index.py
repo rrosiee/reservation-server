@@ -14,7 +14,6 @@ class ReservationViewSet(
     viewsets.GenericViewSet,
     mixins.RetrieveModelMixin,
     mixins.CreateModelMixin,
-    mixins.UpdateModelMixin,
     mixins.DestroyModelMixin,
 ):
     queryset = Reservation.objects.all()

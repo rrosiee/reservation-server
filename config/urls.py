@@ -8,6 +8,7 @@ from apps.reservation.views import (
     ReservationViewSet,
     ReservationsViewSet,
     AdminReservationsViewSet,
+    SchedulesViewSet,
 )
 from apps.user.views import AuthViewSet, UserViewSet
 
@@ -58,6 +59,9 @@ router.register(r"reservations", ReservationsViewSet, basename="reservations")
 router.register(
     r"admin/reservations", AdminReservationsViewSet, basename="admin_reservations"
 )
+
+# Schedules
+router.register(r"schedules", SchedulesViewSet, basename="schedules")
 
 api_urlpatterns = [
     path("api/", include(router.urls)),
