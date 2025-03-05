@@ -1,3 +1,6 @@
+# 예약 서버 아키텍처 및 설계
+### Github Wiki : [Github Wiki 바로 가기](https://github.com/rrosiee/reservation-server/wiki)
+
 # 로컬 실행 방법
 
 로컬에서 해당 서버를 실행하는 방법은 **docker**를 이용한 방법, **local에 직접 데이터베이스**를 생성하는 방법 두 가지가 있습니다.
@@ -11,7 +14,7 @@
 3. docker-compose 실행
 
         $ docker-compose up
-4. api swagger문서 접속 : [http://localhost:8000/docs](http://localhost:8000/docs)
+4. api swagger문서 접속 : [http://localhost:8000/api/docs](http://localhost:8000/api/docs)
 5. (선택) 종료
 
         $ docker-compose down
@@ -34,4 +37,7 @@
 6. 서버 실행
 
         $ python3 manage.py runserver
-7. api swagger문서 접속 : [http://localhost:8000/docs](http://localhost:8000/docs)
+7. api swagger문서 접속 : [http://localhost:8000/api/docs](http://localhost:8000/api/docs)
+
+# API 문서
+- 서버 실행 후  [http://localhost:8000/api/docs](http://localhost:8000/api/docs) 접속 

@@ -2,11 +2,10 @@ from django.contrib.auth.base_user import AbstractBaseUser
 from django.db import models
 
 from apps.user.models.managers.objects import UserObjectManager
-from base.models import BaseModel
 
 
 # Main Section
-class User(AbstractBaseUser, BaseModel):
+class User(AbstractBaseUser):
     email = models.EmailField(unique=True)
     is_admin = models.BooleanField(default=False)
 

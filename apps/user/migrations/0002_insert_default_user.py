@@ -32,6 +32,7 @@ def reverse_insert_default_user(apps, schema_editor):
 class Migration(migrations.Migration):
     dependencies = [
         ('user', '0001_initial'),
+        ('reservation', '0001_initial'),
     ]
 
     operations = [
