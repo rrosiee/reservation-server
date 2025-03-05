@@ -14,6 +14,7 @@ class ReservationListSerializer(ModelSerializer):
             "end_time",
             "applicant_count",
             "is_confirmed",
+            "created"
         )
 
 
@@ -29,4 +30,5 @@ class ReservationListAdminSerializer(ModelSerializer):
             "applicant_count",
             "is_confirmed",
             "reserver_user",
+            "created"
         )

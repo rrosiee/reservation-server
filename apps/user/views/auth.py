@@ -40,7 +40,10 @@ class AuthViewSet(viewsets.GenericViewSet):
     @swagger_auto_schema(
         tags=["Auth - 인증"],
         operation_id="로그인",
-        operation_description="",
+        operation_description="""
+        `테스트 어드민 유저` : {\"email\" : \"admin@google.com\", \"password\" : \"admin1234\"}
+        `테스트 고객 유저` : {\"email\" : \"user@google.com\", \"password\" : \"user1234\"}
+        """,
         request_body=AuthLoginSerializer,
         responses={200: UserTokenSerializer()},
     )

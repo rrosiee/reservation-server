@@ -39,7 +39,7 @@ class SchedulesViewSet(viewsets.ViewSet):
     @swagger_auto_schema(
         tags=["Reservation - 예약"],
         operation_id="예약 가능한 일정 리스트 조회",
-        operation_description="운영/성능상 이유로 30분 단위로 예약이 가능합니다.",
+        operation_description="채용 시험의 경우 정각 혹은 30분에 시작하는 경우가 많으며, 운영/성능상 이유로 30분 단위로 예약이 가능합니다.",
         responses={200: ScheduleSwaggerSerializer(many=True)},
         manual_parameters=[
             openapi.Parameter(
