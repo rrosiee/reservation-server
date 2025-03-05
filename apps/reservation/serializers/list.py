@@ -5,7 +5,7 @@ from apps.user.serializers import UserSerializer
 
 
 # Main Section
-class ReservationSerializer(ModelSerializer):
+class ReservationListSerializer(ModelSerializer):
     class Meta:
         model = Reservation
         fields = (
@@ -18,7 +18,7 @@ class ReservationSerializer(ModelSerializer):
         )
 
 
-class ReservationAdminSerializer(ModelSerializer):
+class ReservationListAdminSerializer(ModelSerializer):
     reserver_user = UserSerializer()
 
     class Meta:

@@ -9,6 +9,7 @@ from apps.reservation.views import (
     ReservationsViewSet,
     AdminReservationsViewSet,
     SchedulesViewSet,
+    AdminReservationViewSet,
 )
 from apps.user.views import AuthViewSet, UserViewSet
 
@@ -58,6 +59,9 @@ router.register(r"reservation", ReservationViewSet, basename="reservation")
 router.register(r"reservations", ReservationsViewSet, basename="reservations")
 router.register(
     r"admin/reservations", AdminReservationsViewSet, basename="admin_reservations"
+)
+router.register(
+    r"admin/reservation", AdminReservationViewSet, basename="admin_reservation"
 )
 
 # Schedules

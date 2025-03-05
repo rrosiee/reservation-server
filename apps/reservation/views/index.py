@@ -7,6 +7,7 @@ from apps.reservation.serializers import (
     ReservationSerializer,
     ReservationCreateSerializer,
     ReservationUpdateSerializer,
+    ReservationListSerializer,
 )
 from apps.reservation.views.filters import ReservationFilter
 from apps.reservation.views.permissions import ReservationPermission
@@ -69,7 +70,7 @@ class ReservationViewSet(
 
 class ReservationsViewSet(viewsets.GenericViewSet, mixins.ListModelMixin):
     queryset = Reservation.objects.all()
-    serializer_class = ReservationSerializer
+    serializer_class = ReservationListSerializer
     filterset_class = ReservationFilter
 
     def get_queryset(self):
@@ -79,7 +80,7 @@ class ReservationsViewSet(viewsets.GenericViewSet, mixins.ListModelMixin):
         tags=["Reservation - 예약"],
         operation_id="예약 리스트 조회",
         operation_description="",
-        responses={200: ReservationSerializer(many=True)},
+        responses={200: ReservationListSerializer(many=True)},
     )
     def list(self, request, *args, **kwargs):
         return super().list(request, *args, **kwargs)
