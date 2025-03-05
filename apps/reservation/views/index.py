@@ -1,5 +1,5 @@
 from drf_yasg.utils import swagger_auto_schema
-from rest_framework import viewsets, mixins, status
+from rest_framework import viewsets, mixins, status, filters
 from rest_framework.exceptions import ValidationError
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
@@ -83,6 +83,9 @@ class ReservationsViewSet(viewsets.GenericViewSet, mixins.ListModelMixin):
     serializer_class = ReservationListSerializer
     filterset_class = ReservationFilter
     pagination_class = PageNumberPagination
+    filter_backends = (filters.OrderingFilter,)
+    ordering_fields = ["start_time", "end_time", "created"]
+    ordering = ["-created"]
 
     def get_queryset(self):
         return Reservation.objects.filter(reserver_user=self.request.user)

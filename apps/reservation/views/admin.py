@@ -1,5 +1,5 @@
 from drf_yasg.utils import swagger_auto_schema
-from rest_framework import viewsets, mixins, status
+from rest_framework import viewsets, mixins, status, filters
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 
@@ -68,6 +68,9 @@ class AdminReservationsViewSet(viewsets.GenericViewSet, mixins.ListModelMixin):
     permission_classes = [AdminReservationsPermission]
     filterset_class = ReservationFilter
     pagination_class = PageNumberPagination
+    filter_backends = (filters.OrderingFilter,)
+    ordering_fields = ["start_time", "end_time", "created"]
+    ordering = ["-created"]
 
     @swagger_auto_schema(
         tags=["Reservation - (어드민) 예약"],
