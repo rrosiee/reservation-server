@@ -1,5 +1,6 @@
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import viewsets, mixins, status
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 
 from apps.reservation.models import Reservation
@@ -66,6 +67,7 @@ class AdminReservationsViewSet(viewsets.GenericViewSet, mixins.ListModelMixin):
     serializer_class = ReservationListAdminSerializer
     permission_classes = [AdminReservationsPermission]
     filterset_class = ReservationFilter
+    pagination_class = PageNumberPagination
 
     @swagger_auto_schema(
         tags=["Reservation - (어드민) 예약"],

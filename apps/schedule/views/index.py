@@ -4,6 +4,7 @@ from django.db.models import Q
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import viewsets
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 
 from apps.reservation.models import Reservation
@@ -13,6 +14,7 @@ from apps.schedule.views.serializers import ScheduleSwaggerSerializer
 # Main Section
 class SchedulesViewSet(viewsets.ViewSet):
     time_unit = 30
+    pagination_class = PageNumberPagination
 
     @classmethod
     def generate_time_slots(cls, target_date):
@@ -47,7 +49,7 @@ class SchedulesViewSet(viewsets.ViewSet):
                 type=openapi.TYPE_STRING,
                 format=openapi.FORMAT_DATE,
                 required=True,
-            ),
+            )
         ],
     )
     def list(self, request, *args, **kwargs):
@@ -84,4 +86,8 @@ class SchedulesViewSet(viewsets.ViewSet):
                     time_slots[i]["available_applicant_count"] - applicant_count, 0
                 )
 
-        return Response(time_slots, status=200)
+        # 5. Pagination 적용
+        paginator = self.pagination_class()
+        paginated_slots = paginator.paginate_queryset(time_slots, request)
+
+        return paginator.get_paginated_response(paginated_slots)
