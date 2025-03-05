@@ -3,4 +3,3 @@ from apps.reservation.views.admin import (
     AdminReservationViewSet,
 )
 from apps.reservation.views.index import ReservationViewSet, ReservationsViewSet
-from apps.reservation.views.schedule import SchedulesViewSet

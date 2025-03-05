@@ -16,7 +16,9 @@ from apps.reservation.views.permissions import (
 
 
 # Main Section
-class AdminReservationViewSet(viewsets.GenericViewSet, mixins.RetrieveModelMixin):
+class AdminReservationViewSet(
+    viewsets.GenericViewSet, mixins.RetrieveModelMixin, mixins.DestroyModelMixin
+):
     queryset = Reservation.objects.all().select_related("reserver_user")
     serializer_class = ReservationAdminSerializer
     permission_classes = [AdminReservationPermission]
@@ -56,10 +58,7 @@ class AdminReservationViewSet(viewsets.GenericViewSet, mixins.RetrieveModelMixin
         responses={204: "No Content"},
     )
     def destroy(self, request, *args, **kwargs):
-        return Response(
-            data=None,
-            status=status.HTTP_204_NO_CONTENT,
-        )
+        return super().destroy(request, *args, **kwargs)
 
 
 class AdminReservationsViewSet(viewsets.GenericViewSet, mixins.ListModelMixin):

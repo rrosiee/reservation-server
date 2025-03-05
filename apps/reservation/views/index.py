@@ -1,5 +1,6 @@
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import viewsets, mixins, status
+from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 
 from apps.reservation.models import Reservation
@@ -71,6 +72,8 @@ class ReservationViewSet(
         responses={204: "No Content"},
     )
     def destroy(self, request, *args, **kwargs):
+        if self.get_object().is_confirmed:
+            raise ValidationError("예약이 확정된 경우, 예약을 삭제할 수 없습니다.")
         return super().destroy(request, *args, **kwargs)
 
 

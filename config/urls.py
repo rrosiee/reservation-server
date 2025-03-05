@@ -8,9 +8,9 @@ from apps.reservation.views import (
     ReservationViewSet,
     ReservationsViewSet,
     AdminReservationsViewSet,
-    SchedulesViewSet,
     AdminReservationViewSet,
 )
+from apps.schedule.views import SchedulesViewSet
 from apps.user.views import AuthViewSet, UserViewSet
 
 # Swagger 문서 관련 API

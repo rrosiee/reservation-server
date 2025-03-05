@@ -7,7 +7,7 @@ class ReservationPermission(BasePermission):
 
         user = request.user
 
-        if view.action in ("retrieve",):
-            if not (user.is_admin or obj.reserver_user == user):
+        if view.action in ("retrieve", "partial_update", "destroy"):
+            if not obj.reserver_user == user:
                 return False
         return True
