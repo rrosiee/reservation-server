@@ -7,4 +7,11 @@ from apps.reservation.models import Reservation
 class ReservationSerializer(ModelSerializer):
     class Meta:
         model = Reservation
-        fields = ("id", "start_time", "end_time", "applicant_count", "is_confirmed")
+        fields = (
+            "id",
+            "title",
+            "start_time",
+            "end_time",
+            "applicant_count",
+            "is_confirmed",
+        )

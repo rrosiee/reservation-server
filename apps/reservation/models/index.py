@@ -5,6 +5,7 @@ from django.db.models import Model
 # Main Section
 class Reservation(Model):
     # Main
+    title = models.CharField(max_length=100, null=False, blank=False)
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
     applicant_count = models.IntegerField()

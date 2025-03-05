@@ -4,7 +4,7 @@ from django.contrib.auth.hashers import make_password
 
 # Main Section
 class UserObjectManager(BaseUserManager):
-    def signup_user(self, email, password, admin_code):
+    def signup_user(self, email, password, admin_code=None):
         is_admin = False
         if admin_code and admin_code == "abcd":  # TODO : admin_code는 임시값
             is_admin = True

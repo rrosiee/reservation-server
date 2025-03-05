@@ -1,5 +1,6 @@
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import viewsets, mixins
+from rest_framework.response import Response
 
 from apps.reservation.models import Reservation
 from apps.reservation.serializers import (
@@ -7,6 +8,7 @@ from apps.reservation.serializers import (
     ReservationCreateSerializer,
     ReservationUpdateSerializer,
 )
+from apps.reservation.views.permissions import ReservationPermission
 
 
 # Main Section
@@ -17,11 +19,8 @@ class ReservationViewSet(
     mixins.DestroyModelMixin,
 ):
     queryset = Reservation.objects.all()
-    serializers = {
-        "default": ReservationSerializer,
-        "create": ReservationCreateSerializer,
-        "update": ReservationUpdateSerializer,
-    }
+    serializer_class = ReservationSerializer
+    permission_classes = [ReservationPermission]
 
     @swagger_auto_schema(
         tags=["Reservation - 예약"],
@@ -40,7 +39,12 @@ class ReservationViewSet(
         responses={201: ReservationSerializer()},
     )
     def create(self, request, *args, **kwargs):
-        return super().create(request, *args, **kwargs)
+        serializer = ReservationCreateSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        reservation = serializer.save(reserver_user=request.user)
+        return Response(
+            data=ReservationSerializer(instance=reservation).data, status=200
+        )
 
     @swagger_auto_schema(
         tags=["Reservation - 예약"],
