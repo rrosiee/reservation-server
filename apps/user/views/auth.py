@@ -23,8 +23,8 @@ class AuthViewSet(viewsets.GenericViewSet):
 
     @swagger_auto_schema(
         tags=["Auth - 인증"],
-        operation_summary="회원가입",
-        operation_description="",
+        operation_id="회원가입",
+        operation_description="`admin_code` : 어드민 코드를 abcd로 할 경우 어드민 계정으로 회원가입이 가능합니다.",
         request_body=AuthSignupSerializer,
         responses={201: UserSerializer()},
     )
@@ -39,7 +39,7 @@ class AuthViewSet(viewsets.GenericViewSet):
 
     @swagger_auto_schema(
         tags=["Auth - 인증"],
-        operation_summary="로그인",
+        operation_id="로그인",
         operation_description="",
         request_body=AuthLoginSerializer,
         responses={200: UserTokenSerializer()},

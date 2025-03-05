@@ -4,13 +4,13 @@ from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework import permissions, routers
 
-from apps.user.views import AuthViewSet
+from apps.user.views import AuthViewSet, UserViewSet
 
 # Swagger 문서 관련 API
 schema_view = get_schema_view(
     openapi.Info(
         title="시험 일정 예약 시스템 API",
-        default_version="v1",
+        default_version="",
         description="본 API는 프로그래머스가 운영하는 온라인 시험 플랫폼에서 기업 고객이 채용 시험 일정을 효율적으로 예약할 수 있도록 지원하는 시스템입니다.",
         contact=openapi.Contact(email="offbeat1020@naver.com"),
         license=openapi.License(name="MIT License"),
@@ -40,7 +40,12 @@ swagger_urlpatterns = [
 
 # API 관련 URL
 router = routers.SimpleRouter(trailing_slash=False)
+
+# Auth
 router.register(r"auth", AuthViewSet, basename="auth")
+
+# User
+router.register(r"user", UserViewSet, basename="user")
 
 api_urlpatterns = [
     path("api/", include(router.urls)),
