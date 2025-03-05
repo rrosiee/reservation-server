@@ -8,6 +8,7 @@ from apps.reservation.serializers import (
     ReservationCreateSerializer,
     ReservationUpdateSerializer,
 )
+from apps.reservation.views.filters import ReservationFilter
 from apps.reservation.views.permissions import ReservationPermission
 
 
@@ -68,9 +69,11 @@ class ReservationViewSet(
 
 class ReservationsViewSet(viewsets.GenericViewSet, mixins.ListModelMixin):
     queryset = Reservation.objects.all()
-    serializers = {
-        "default": ReservationSerializer,
-    }
+    serializer_class = ReservationSerializer
+    filterset_class = ReservationFilter
+
+    def get_queryset(self):
+        return Reservation.objects.filter(reserver_user=self.request.user)
 
     @swagger_auto_schema(
         tags=["Reservation - 예약"],

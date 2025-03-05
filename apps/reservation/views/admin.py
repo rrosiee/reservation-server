@@ -3,14 +3,16 @@ from rest_framework import viewsets, mixins
 
 from apps.reservation.models import Reservation
 from apps.reservation.serializers import ReservationSerializer
+from apps.reservation.views.filters import ReservationFilter
+from apps.reservation.views.permissions import AdminReservationPermission
 
 
 # Main Section
 class AdminReservationsViewSet(viewsets.GenericViewSet, mixins.ListModelMixin):
     queryset = Reservation.objects.all()
-    serializers = {
-        "default": ReservationSerializer,
-    }
+    serializer_class = ReservationSerializer
+    permission_classes = [AdminReservationPermission]
+    filterset_class = ReservationFilter
 
     @swagger_auto_schema(
         tags=["Reservation - 예약"],
