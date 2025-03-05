@@ -1,5 +1,12 @@
-# 예약 서버 아키텍처 및 설계
-### Github Wiki : [Github Wiki 바로 가기](https://github.com/rrosiee/reservation-server/wiki)
+# 개요
+본 프로젝트는 시험 일정 예약 시스템을 위한 RESTful API를 제공합니다. 설계 및 관련 아키텍처는 github wiki를 통해 확인해주시면 정말 감사하겠습니다 :)
+- github wiki : [Github Wiki 바로 가기](https://github.com/rrosiee/reservation-server/wiki)
+
+# 요구사항
+- Python 3.12+
+- Django
+- Django REST framework
+- drf-yasg (Swagger 문서 자동 생성)
 
 # 로컬 실행 방법
 
@@ -39,5 +46,41 @@
         $ python3 manage.py runserver
 7. api swagger문서 접속 : [http://localhost:8000/api/docs](http://localhost:8000/api/docs)
 
-# API 문서
-- 서버 실행 후  [http://localhost:8000/api/docs](http://localhost:8000/api/docs) 접속 
+## Swagger 문서
+Swagger UI를 통해 API 문서를 확인할 수 있습니다.
+```bash
+# 개발 서버 실행 후 접속
+http://localhost:8000/api/docs/
+```
+
+## API 엔드포인트
+
+### 인증 API
+| 메소드 | 엔드포인트       | 설명          |
+|--------|----------------|--------------|
+| POST   | `/api/auth/login/` | 사용자 로그인 |
+| POST   | `/api/auth/logout/` | 사용자 로그아웃 |
+
+### 사용자 API
+| 메소드 | 엔드포인트      | 설명          |
+|--------|---------------|--------------|
+| GET    | `/api/user/`  | 사용자 정보 조회 |
+| PUT    | `/api/user/`  | 사용자 정보 수정 |
+
+### 예약 API
+| 메소드 | 엔드포인트         | 설명            |
+|--------|-----------------|----------------|
+| POST   | `/api/reservation/` | 새로운 예약 생성 |
+| GET    | `/api/reservations/` | 예약 목록 조회 |
+
+### 관리자 예약 API
+| 메소드 | 엔드포인트               | 설명               |
+|--------|----------------------|------------------|
+| GET    | `/api/admin/reservations/` | 모든 예약 조회 (관리자) |
+| DELETE | `/api/admin/reservation/{id}/` | 예약 삭제 (관리자) |
+
+### 일정 API
+| 메소드 | 엔드포인트       | 설명           |
+|--------|--------------|-------------|
+| GET    | `/api/schedules/` | 일정 목록 조회 |
+
