@@ -11,7 +11,7 @@ schema_view = get_schema_view(
     openapi.Info(
         title="시험 일정 예약 시스템 API",
         default_version="",
-        description="본 API는 프로그래머스가 운영하는 온라인 시험 플랫폼에서 기업 고객이 채용 시험 일정을 효율적으로 예약할 수 있도록 지원하는 시스템입니다.",
+        description="미구현 사항 : 유저 비밀번호 변경, admin_code를 동적으로 조정하는 것",
         contact=openapi.Contact(email="offbeat1020@naver.com"),
         license=openapi.License(name="MIT License"),
     ),
