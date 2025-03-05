@@ -1,9 +1,10 @@
 from django.db import models
-from django.db.models import Model
+
+from base.models import BaseModel
 
 
 # Main Section
-class Reservation(Model):
+class Reservation(BaseModel):
     # Main
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
