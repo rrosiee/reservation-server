@@ -10,7 +10,6 @@ class ReservationListSerializer(ModelSerializer):
         model = Reservation
         fields = (
             "id",
-            "title",
             "start_time",
             "end_time",
             "applicant_count",
@@ -25,7 +24,6 @@ class ReservationListAdminSerializer(ModelSerializer):
         model = Reservation
         fields = (
             "id",
-            "title",
             "start_time",
             "end_time",
             "applicant_count",
