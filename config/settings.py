@@ -1,4 +1,5 @@
 from pathlib import Path
+
 import environ
 
 # Paths
@@ -24,9 +25,7 @@ DEFAULT_APPS = [
     "rest_framework.authtoken",
     "drf_yasg",
 ]
-LOCAL_APPS = [
-    "apps.user.apps.UserConfig"
-]
+LOCAL_APPS = ["apps.user.apps.UserConfig"]
 INSTALLED_APPS = DEFAULT_APPS + LOCAL_APPS
 
 # Middleware
@@ -57,11 +56,11 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # DRF
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
-        "rest_framework.permissions.IsAuthenticated",
+        "rest_framework.permissions.AllowAny",
     ],
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework.authentication.TokenAuthentication",
-    ]
+    ],
 }
 SWAGGER_SETTINGS = {
     "DEFAULT_INFO": "routers.schema_view",
@@ -81,9 +80,8 @@ SWAGGER_SETTINGS = {
     "SECURITY_REQUIREMENTS": [{"Bearer": []}],
 }
 
-
 # URLs
-ROOT_URLCONF = "config.routers.index"
+ROOT_URLCONF = "config.urls"
 
 # Template
 TEMPLATES = [
@@ -126,7 +124,12 @@ AUTH_USER_MODEL = "user.User"
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
-    "formatters": {"verbose": {"format": "%(levelname)s %(asctime)s %(module)s " "%(process)d %(thread)d %(message)s"}},
+    "formatters": {
+        "verbose": {
+            "format": "%(levelname)s %(asctime)s %(module)s "
+                      "%(process)d %(thread)d %(message)s"
+        }
+    },
     "handlers": {
         "console": {
             "level": "DEBUG",
